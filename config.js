@@ -4,9 +4,9 @@ module.exports = {
   build : {
     env: { NODE_ENV: '"production"' },
     index: path.resolve(__dirname, './dist/index.html'),
-    assetsRoot: path.resolve(__dirname, './dist'),    // path
+    assetsRoot: path.resolve(__dirname, './dist'),
     assetsSubDirectory : './static',
-    assetsPublicPath : './',    // publicpath
+    assetsPublicPath : './',    //
     productionSourceMap : false,
     productionGzip : false,
     productionGzipExtensions : ['js', 'css']

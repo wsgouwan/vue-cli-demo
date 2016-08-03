@@ -15,9 +15,8 @@
 </script>
 
 <style>
-  @import "./assets/style/main.scss";
   @import "./assets/style/reset.css";
-
+  @import "./assets/style/main.scss";
   html{
     height:100%;
   }

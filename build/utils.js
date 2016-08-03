@@ -5,6 +5,9 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 exports.assetsPath = function (_path) {
   return path.posix.join(config.build.assetsSubDirectory, _path)
 }
+exports.assetsCssPath = function (_path) {
+  return path.posix.join(config.build.assetsPublicPath, _path)
+}
 
 exports.cssLoaders = function (options) {
   options = options || {}
@@ -20,10 +23,10 @@ exports.cssLoaders = function (options) {
         extraParamChar = '?'
       }
       return loader + (options.sourceMap ? extraParamChar + 'sourceMap' : '')
-    }).join('!')
+    }).join('!');
 
     if (options.extract) {
-      return ExtractTextPlugin.extract('vue-style-loader', sourceLoader)
+      return ExtractTextPlugin.extract('vue-style-loader', sourceLoader, {publicPath: '../'})
     } else {
       return ['vue-style-loader', sourceLoader].join('!')
     }
