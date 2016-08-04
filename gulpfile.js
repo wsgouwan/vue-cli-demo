@@ -1,53 +1,23 @@
 var gulp = require('gulp');
 var fs = require('fs');
-var buf = require('buffer');
 var path = require('path');
 
 var imagesPath = path.join('./src/assets/images');
 var jsPath     = path.join('./src/assets/scripts/loadimg.js');
 
-gulp.task('readImages', () => {
-    console.log('====================readImages=====================');
-    var promise = new Promise( (resolve, reject) =>{
-        fs.readdir(imagesPath, function (err, files) {
-            if (err) {
-                console.log(err);
-                return false;
-            }
-            var img = /.(png|jpe?g)(\?.*)?$/;
-            var list = [];
-            var len = files.length;
-            var count = 0;
-            files.forEach(function (file) {
-                // 在window  和在 MAC 下  路径的斜杠不同
-                var filePath = imagesPath + '\/' + file;
-                fs.stat(filePath, function (err, data) {
-                    count++;
-                    if (err) {
-                        reject(err);
-                        throw err;
-                    } else if (img.test(file) && data.size > 1023) {
-                        list.push(file);
-                    }
-                    if (count == len) {
-                        resolve(list);
-                    }
-                })
-            });
-        });
-    });
-    return promise;
-});
-
-gulp.task('writeImages',['readImages'], (promise) =>{
+gulp.task('writeImages', () =>{
     //  js替换文件正则~
     var re = /(\/\*listStart\*\/)([\s\S]*?)(\/\*listEnd\*\/)/;
-    readFile().then(fileText =>{
-        return fileText;
-    }).then(text =>{
+    readImages().then( (imagesList) =>{
+        return imagesList;
+    }).then( imagesList =>{
+        return readFile().then( fileText => {
+            return [imagesList, fileText];
+        });
+    }).then(propsArr =>{
         //  jsText     读取到的文件 即将写入到loadImg.js 文件的数组列表
-        var fileText = ['1.png', '2.png', '3.png', '4.png', '5.png'];
-        var jsText = text;
+        var jsText = propsArr[1];
+        var fileText = propsArr[0];
         if(re.test(jsText)){
             jsText = jsText.replace(re, function ($0) {
                 return '/*listStart*/\n'
@@ -59,6 +29,41 @@ gulp.task('writeImages',['readImages'], (promise) =>{
     }).then( jsText=>{
         writeFile(jsText);
     } );
+
+    // 读取图片文件目录  配合打包, 把大于10K的图片全部读取并存写入到loadimg.js中
+    function readImages() {
+        console.log('====================readImages=====================');
+        var promise = new Promise( (resolve, reject) =>{
+            fs.readdir(imagesPath, function (err, files) {
+                if (err) {
+                    throw err;
+                    return false;
+                }
+                var img = /.(png|jpe?g)(\?.*)?$/;
+                var list = [];
+                var len = files.length;
+                var count = 0;
+                files.forEach(function (file) {
+                    // 在window  和在 MAC 下  路径的斜杠不同
+                    var filePath = imagesPath + '\/' + file;
+                    fs.stat(filePath, function (err, data) {
+                        count++;
+                        if (err) {
+                            reject(err);
+                            throw err;
+                        } else if (img.test(file) && data.size > 9999) {
+                            list.push(file);
+                        }
+                        if (count == len) {
+                            resolve(list);
+                        }
+                    })
+                });
+            });
+        });
+        return promise;
+    }
+
     // 读取JS文件
     function readFile() {
         var promise = new Promise((resolve, reject) =>{
@@ -83,7 +88,6 @@ gulp.task('writeImages',['readImages'], (promise) =>{
         })
     }
 
-
 });
 
 gulp.task('default', () => {
@@ -91,5 +95,5 @@ gulp.task('default', () => {
 });
 
 gulp.watch('./src/assets/images').on('change', () => {
-
+    gulp.start('writeImages');
 });
