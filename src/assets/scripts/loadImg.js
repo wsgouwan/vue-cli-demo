@@ -1,9 +1,6 @@
-/**
- * Created by codoon on 16/8/4.
- */
 
 /*listStart*/
-var list = [];
+var list =["1.png","2.png","3.png","4.png","5.png"];
 /*listEnd*/
 
 var list2 = ['logo.png', 'logo2.png'];

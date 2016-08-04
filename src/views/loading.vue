@@ -9,7 +9,7 @@
     }
 </style>
 <script type="text/ecmascript-6">
-    import list from '../assets/scripts/loadImg';
+    import list from '../assets/scripts/loadimg';
 
     export default{
         data(){
