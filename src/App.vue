@@ -6,8 +6,22 @@
 
 <script>
   import index from './views/index.vue';
-
   export default {
+    data() {
+      return {
+        a : 1
+      }
+    },
+
+    init() {
+      var path = './assets/images/';
+      var img = 'index-bg-24.png';
+
+      var img2 = require(path + img);
+      console.log(img2)
+
+
+    },
     components : {
       index
     }

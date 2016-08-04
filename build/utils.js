@@ -4,19 +4,19 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 exports.assetsPath = function (_path) {
   return path.posix.join(config.build.assetsSubDirectory, _path)
-}
+};
 exports.assetsCssPath = function (_path) {
   return path.posix.join(config.build.assetsPublicPath, _path)
-}
+};
 
 exports.cssLoaders = function (options) {
-  options = options || {}
+  options = options || {};
   // generate loader string to be used with extract text plugin
   function generateLoaders (loaders) {
     var sourceLoader = loaders.map(function (loader) {
-      var extraParamChar
+      var extraParamChar;
       if (/\?/.test(loader)) {
-        loader = loader.replace(/\?/, '-loader?')
+        loader = loader.replace(/\?/, '-loader?');
         extraParamChar = '&'
       } else {
         loader = loader + '-loader'

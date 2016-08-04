@@ -82,7 +82,7 @@ var webpackConfig = merge(baseWebpackConfig, {
 })
 
 if (config.build.productionGzip) {
-  var CompressionWebpackPlugin = require('compression-webpack-plugin')
+  var CompressionWebpackPlugin = require('compression-webpack-plugin');
 
   webpackConfig.plugins.push(
     new CompressionWebpackPlugin({
@@ -99,4 +99,4 @@ if (config.build.productionGzip) {
   )
 }
 
-module.exports = webpackConfig
+module.exports = webpackConfig;
