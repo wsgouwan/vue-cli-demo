@@ -5,7 +5,8 @@ var projectRoot = path.resolve(__dirname, '../');
 
 module.exports = {
     entry: {
-        app: './src/main.js'
+        app: './src/main.js',
+        share: './src/share.js'
     },
     output: {
         path: config.build.assetsRoot,
@@ -49,7 +50,7 @@ module.exports = {
                 loader: 'url',
                 query: {
                     limit: 10000,
-                    name: utils.assetsPath('img/[name].[hash:7].[ext]')
+                    name: '/' + utils.assetsPath('img/[name].[hash:7].[ext]')
                 }
             },
             {

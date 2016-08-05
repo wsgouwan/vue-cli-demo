@@ -1,6 +1,6 @@
-var path = require('path')
-var config = require('../config')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var path = require('path');
+var config = require('../config');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 exports.assetsPath = function (_path) {
   return path.posix.join(config.build.assetsSubDirectory, _path)
@@ -26,7 +26,7 @@ exports.cssLoaders = function (options) {
     }).join('!');
 
     if (options.extract) {
-      return ExtractTextPlugin.extract('vue-style-loader', sourceLoader, {publicPath: '../'})
+      return ExtractTextPlugin.extract('vue-style-loader', sourceLoader, {publicPath: '../..'})
     } else {
       return ['vue-style-loader', sourceLoader].join('!')
     }
