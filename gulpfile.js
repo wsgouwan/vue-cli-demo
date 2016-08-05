@@ -5,6 +5,7 @@ var path = require('path');
 var imagesPath = path.join('./src/assets/images');
 var jsPath     = path.join('./src/assets/scripts/loadimg.js');
 
+//  读取images 文件
 gulp.task('writeImages', () =>{
     //  js替换文件正则~
     var re = /(\/\*listStart\*\/)([\s\S]*?)(\/\*listEnd\*\/)/;
@@ -63,7 +64,6 @@ gulp.task('writeImages', () =>{
         });
         return promise;
     }
-
     // 读取JS文件
     function readFile() {
         var promise = new Promise((resolve, reject) =>{
@@ -90,9 +90,6 @@ gulp.task('writeImages', () =>{
 
 });
 
-gulp.task('default', () => {
-    gulp.start('writeImages');
-});
 
 gulp.watch('./src/assets/images').on('change', () => {
     gulp.start('writeImages');
