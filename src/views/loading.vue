@@ -44,6 +44,9 @@
                 console.log(this.progress);
                 if(this.progress == 100){
                     window.clearInterval(timer);
+                    setTimeout( ()=>{
+                        this.$route.router.go('index')
+                    }, 2000 )
                 }
             }, 33)
 

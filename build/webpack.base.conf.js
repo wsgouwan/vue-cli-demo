@@ -50,7 +50,8 @@ module.exports = {
                 loader: 'url',
                 query: {
                     limit: 10000,
-                    name: '/' + utils.assetsPath('img/[name].[hash:7].[ext]')
+                    name: process.env.NODE_ENV === 'production'?'/' + utils.assetsPath('img/[name].[ext]'): utils.assetsPath('img/[name].[ext]')
+
                 }
             },
             {

@@ -3,7 +3,6 @@
         <router-view class="router"></router-view>
     </div>
 </template>
-
 <script>
     export default {
         data() {
@@ -17,7 +16,6 @@
         components: {}
     }
 </script>
-
 <style>
     @import "./assets/style/reset.css";
     @import "./assets/style/main.scss";

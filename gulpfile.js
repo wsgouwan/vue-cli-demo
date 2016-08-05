@@ -5,6 +5,30 @@ var path = require('path');
 var imagesPath = path.join('./src/assets/images');
 var jsPath     = path.join('./src/assets/scripts/loadimg.js');
 
+var gulpCloudNine = require('gulp-cloud-nine');
+var upaiyun =  {
+    bucket: 'activity-codoon',
+    username: 'activity',
+    password: 'actp0o9i8u7'
+};
+var cloudNine =  gulpCloudNine({
+    upaiyun: upaiyun,
+    distDir: 'dist'   // 这里改为你自己的发布目录
+});
+
+gulp.task('init', function() {
+    return cloudNine.init();
+});
+
+gulp.task('update', function() {
+    cloudNine.update();
+});
+
+
+gulp.task('push', function() {
+    cloudNine.push();
+});
+
 //  读取images 文件
 gulp.task('writeImages', () =>{
     //  js替换文件正则~

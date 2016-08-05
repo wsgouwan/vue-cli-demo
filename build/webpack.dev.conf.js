@@ -25,10 +25,17 @@ module.exports = merge(baseWebpackConfig, {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'index.html',
-      inject: true
-    })
+      new HtmlWebpackPlugin({
+          excludeChunks: ['share'],
+          filename: 'index.html',
+          template: 'index.html',
+          inject: true
+      }),
+      new HtmlWebpackPlugin({
+          excludeChunks: ['app'],
+          filename: 'share.html',
+          template: 'share.html',
+          inject: true
+      })
   ]
-})
+});
