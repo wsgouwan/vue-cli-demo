@@ -24,5 +24,7 @@ npm run e2e
 npm test
 ```
 乐活动架子~
+index.html 为活动的入口
+share.html 为分享页面的入口
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

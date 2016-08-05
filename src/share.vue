@@ -10,7 +10,7 @@
     export default{
         data(){
             return{
-                msg:'hello vue'
+                msg:'hello share-page!!!'
             }
         }
 
