@@ -13,6 +13,5 @@
                 msg:'hello share-page!!!'
             }
         }
-
     }
 </script>
