@@ -1,11 +1,16 @@
 <template>
     <div>
         loading!!!
+        <p>{{progress}}</p>
+        <p v-for="image in images">{{image.src}} <span>-{{image.complete}}</span></p>
     </div>
 </template>
 <style>
     body {
         /*background-color:#ff0000;*/
+    }
+    p{
+        font-size: 0.4rem;
     }
 </style>
 <script type="text/ecmascript-6">
@@ -15,7 +20,8 @@
         data(){
             return {
                 msg: 'hello vue',
-                progress: 0
+                progress: 0,
+                imagse: []
             }
         },
         init() {
@@ -34,6 +40,7 @@
                 })
             }
             var timer = setInterval( ()=>{
+                var self = this;
                 images.forEach(function(img, index){
                     if(img.complete){
                         count = count + 1;
@@ -45,9 +52,10 @@
                 if(this.progress == 100){
                     window.clearInterval(timer);
                     setTimeout( ()=>{
-                        this.$route.router.go('index')
+//                        this.$route.router.go('index');
                     }, 2000 )
                 }
+                self.images = images;
             }, 33)
         }
     }

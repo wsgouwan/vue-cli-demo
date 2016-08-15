@@ -1,6 +1,5 @@
 <template>
     <div id="app">
-        <!--<router-view class="router"></router-view>-->
         <router-view class="router" :transition="transitionName" transition-mode="out-in"></router-view>
     </div>
 </template>
@@ -15,7 +14,6 @@
         ready(){
             this.$route.router.beforeEach((transition)=>{
                 var currentHash = window.location.hash.substr(2);
-                console.log(currentHash);
                 if(currentHash != this.hashStack[this.hashStack.length -2]){
                     this.hashStack.push(currentHash);
                     this.transitionName = 'go';
@@ -23,22 +21,10 @@
                     this.hashStack.pop();
                     this.transitionName = 'back';
                 }
-                console.log(this.hashStack);
                 setTimeout(function () {
                     transition.next()
                 }, 0)
             });
-//            window.addEventListener('hashchange', ()=>{
-//                var currentHash = window.location.hash.substr(2);
-//                console.log(this.hashStack);
-//                if(currentHash != this.hashStack[this.hashStack.length -2]){
-//                    this.hashStack.push(currentHash);
-//                    this.transitionName = 'go';
-//                }else{
-//                    this.hashStack.pop();
-//                    this.transitionName = 'back';
-//                }
-//            },false);
         },
         methods: {
             changeHashStack(obj){
@@ -49,7 +35,7 @@
         components: {}
     }
 </script>
-<style>
+<style lang="scss">
     @import "./assets/style/reset.css";
     @import "./assets/style/main.scss";
 
