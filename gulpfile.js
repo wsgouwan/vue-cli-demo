@@ -114,7 +114,3 @@ gulp.task('writeImages', () =>{
 
 });
 
-
-gulp.watch('./src/assets/images').on('change', () => {
-    gulp.start('writeImages');
-});
