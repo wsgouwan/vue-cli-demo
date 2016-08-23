@@ -52,7 +52,7 @@
                 if(this.progress == 100){
                     window.clearInterval(timer);
                     setTimeout( ()=>{
-//                        this.$route.router.go('index');
+                        this.$route.router.replace('index');
                     }, 2000 )
                 }
                 self.images = images;

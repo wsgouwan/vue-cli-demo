@@ -13,7 +13,7 @@ module.exports = {
   },
   dev : {
     env : {NODE_ENV : '"development"'},
-    port : 8001,
+    port : 9000,
     assetsSubDirectory : 'static',
     assetsPublicPath : '/',
     proxyTable : {}

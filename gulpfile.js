@@ -3,7 +3,7 @@ var fs = require('fs');
 var path = require('path');
 
 var imagesPath = path.join('./src/assets/images');
-var jsPath     = path.join('./src/assets/scripts/loadimg.js');
+var jsPath     = path.join('./src/assets/scripts/loadimg2.js');
 
 var gulpCloudNine = require('gulp-cloud-nine');
 var upaiyun =  {
@@ -57,12 +57,11 @@ gulp.task('writeImages', () =>{
 
     // 读取图片文件目录  配合打包, 把大于10K的图片全部读取并存写入到loadimg.js中
     function readImages() {
-        console.log('====================readImages=====================');
+        console.log('====================readImages start=====================');
         var promise = new Promise( (resolve, reject) =>{
             fs.readdir(imagesPath, function (err, files) {
                 if (err) {
                     throw err;
-                    return false;
                 }
                 var img = /.(png|jpe?g)(\?.*)?$/;
                 var list = [];
@@ -93,7 +92,12 @@ gulp.task('writeImages', () =>{
         var promise = new Promise((resolve, reject) =>{
             fs.readFile(jsPath, function (err, data) {
                 if(err){
-                    throw err;
+                    if(err.errno == -2){
+                        console.log('没有找到文件。。。')
+                    }else{
+                        throw err;
+                    }
+                    //
                 }
                 if(typeof data == 'object'){
                     resolve(data.toString());

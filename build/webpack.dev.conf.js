@@ -32,7 +32,7 @@ module.exports = merge(baseWebpackConfig, {
           inject: true
       }),
       new HtmlWebpackPlugin({
-          excludeChunks: ['app'],
+          excludeChunks: ['main'],
           filename: 'share.html',
           template: 'share.html',
           inject: true

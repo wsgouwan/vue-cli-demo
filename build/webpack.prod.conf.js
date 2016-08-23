@@ -56,7 +56,7 @@ var webpackConfig = merge(baseWebpackConfig, {
             chunksSortMode: 'dependency'
         }),
         new HtmlWebpackPlugin({
-            excludeChunks: ['app'],
+            excludeChunks: ['main'],
             filename: 'share.html',
             template: 'share.html',
             inject: true,
