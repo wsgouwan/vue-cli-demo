@@ -1,0 +1,14 @@
+{
+  "name": "vue-cli",
+  "version": "0.0.2",
+  "description": "A Vue.js project",
+  "author": "wsgouwan@126.com <wsgouwan@126.com>",
+  "private": true,
+  "scripts": {
+    "dev": "node build/dev-server.js",
+    "build": "node build/build.js",
+    "test": ""
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
