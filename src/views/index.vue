@@ -1,7 +1,10 @@
 <template>
-    <div class="index">
-        <a v-link="{name: 'details'}">详情</a>
-        this is a vue-cli demo!!!
+    <div>
+        <div class="index">
+            <a v-link="{name: 'details'}">详情</a>
+            this is a vue-cli demo!!!
+        </div>
+        <input type="button" @click="uploadImg" value="上传图片">
     </div>
 </template>
 
@@ -23,7 +26,8 @@
     export default{
         data(){
             return {
-                msg : 'hello vue'
+                msg : 'hello vue',
+                userInfo: {}
             }
         },
         init(){
@@ -55,20 +59,47 @@
                 console.log(a)
             }
 
-//            fn(a, b);
-//            console.log(a, b);
-
-
-
-
-            common.test(params).then(res =>{
-                console.log(res)
+            common.userInfo().then(res =>{
+                this.userInfo = res.data.data;
             });
 
-//            common.test2(params).then(res =>{
-//                console.log(res)
-//            })
+        },
+        methods: {
+            uploadImg(){
+                common.nativeUploadImg().then(function (res) {
+                    window.alert('上传到又拍成功~');
+                    return res;
+                }, (err_res) =>{
+                    window.alert('上传失败~')
+                }).then((res)=>{
+                    var params = {};
+                    params.url = res.imgUrl[0];
+                    params.createTime = new Date().toLocaleString();
+                    params.eventId = '2003';
+                    params.nick = '万里';
+                    params.userId = '68445bda-9069-4312-bf71-f605872e8bb5';
 
+                    common.uploadImg(params).then(res =>{
+                        window.alert(JSON.stringify(res));
+                    })
+                })
+
+
+//                var params = {};
+//                params.url = 'http://img3.codoon.com/backend3f057acd027344fa917aa4173f85db1b8';
+//                params.createTime = new Date().valueOf();
+//                params.eventId = '2003';
+//                params.nick = '万里';
+//                params.eventName = '活动名称3'
+//                params.userId = '68445bda-9069-4312-bf71-f605872e8bb5';
+//
+//                console.log(params)
+//
+//                common.uploadImg(params).then(res =>{
+//                    window.alert(JSON.stringify(res));
+//                })
+
+            }
         },
 
         components : {
